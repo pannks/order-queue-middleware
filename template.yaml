@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  GoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: .
+      Environment:
+        Variables:
+          MONGODB_URI: MongoDBURI
+      Events:
+        BookOrder:
+          Type: Api
+          Properties:
+            Path: /bookOrder
+            Method: post
+Parameters:
+  MongoDBURI:
+    Type: String
+    Default: "your-mongodb-uri"
